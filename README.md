@@ -18,3 +18,7 @@ And you are done!
 
 ### Initialization
 You can load the view from a nib or instantiate it programmatically.
+
+##Preview (click to see video)
+
+[![ScreenShot](https://raw.github.com/TopicSo/CADVoteCountView/master/Example/Screenshots/Screenshot.png)](http://youtu.be/dHyo2elNjIE)
