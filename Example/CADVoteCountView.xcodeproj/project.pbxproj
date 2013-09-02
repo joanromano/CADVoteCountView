@@ -1,0 +1,303 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8CB3254617D48FBB00A67580 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB3254517D48FBB00A67580 /* UIKit.framework */; };
+		8CB3254817D48FBB00A67580 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB3254717D48FBB00A67580 /* Foundation.framework */; };
+		8CB3254A17D48FBB00A67580 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB3254917D48FBB00A67580 /* CoreGraphics.framework */; };
+		8CB3255017D48FBB00A67580 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8CB3254E17D48FBB00A67580 /* InfoPlist.strings */; };
+		8CB3255217D48FBB00A67580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB3255117D48FBB00A67580 /* main.m */; };
+		8CB3255617D48FBB00A67580 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB3255517D48FBB00A67580 /* AppDelegate.m */; };
+		8CB3255817D48FBB00A67580 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB3255717D48FBB00A67580 /* Default.png */; };
+		8CB3255A17D48FBB00A67580 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB3255917D48FBB00A67580 /* Default@2x.png */; };
+		8CB3255C17D48FBB00A67580 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB3255B17D48FBB00A67580 /* Default-568h@2x.png */; };
+		8CB3256617D48FE000A67580 /* CADVoteCountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB3256317D48FE000A67580 /* CADVoteCountView.m */; };
+		8CB3256717D48FE000A67580 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB3256517D48FE000A67580 /* ViewController.m */; };
+		8CB3256917D4904200A67580 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB3256817D4904200A67580 /* QuartzCore.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8CB3254217D48FBB00A67580 /* CADVoteCountView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CADVoteCountView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CB3254517D48FBB00A67580 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8CB3254717D48FBB00A67580 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8CB3254917D48FBB00A67580 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8CB3254D17D48FBB00A67580 /* CADVoteCountView-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CADVoteCountView-Info.plist"; sourceTree = "<group>"; };
+		8CB3254F17D48FBB00A67580 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8CB3255117D48FBB00A67580 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8CB3255317D48FBB00A67580 /* CADVoteCountView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CADVoteCountView-Prefix.pch"; sourceTree = "<group>"; };
+		8CB3255417D48FBB00A67580 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		8CB3255517D48FBB00A67580 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8CB3255717D48FBB00A67580 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		8CB3255917D48FBB00A67580 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		8CB3255B17D48FBB00A67580 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		8CB3256217D48FE000A67580 /* CADVoteCountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADVoteCountView.h; sourceTree = "<group>"; };
+		8CB3256317D48FE000A67580 /* CADVoteCountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CADVoteCountView.m; sourceTree = "<group>"; };
+		8CB3256417D48FE000A67580 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		8CB3256517D48FE000A67580 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8CB3256817D4904200A67580 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8CB3253F17D48FBB00A67580 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CB3256917D4904200A67580 /* QuartzCore.framework in Frameworks */,
+				8CB3254617D48FBB00A67580 /* UIKit.framework in Frameworks */,
+				8CB3254817D48FBB00A67580 /* Foundation.framework in Frameworks */,
+				8CB3254A17D48FBB00A67580 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8CB3253917D48FBB00A67580 = {
+			isa = PBXGroup;
+			children = (
+				8CB3254B17D48FBB00A67580 /* CADVoteCountView */,
+				8CB3254417D48FBB00A67580 /* Frameworks */,
+				8CB3254317D48FBB00A67580 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8CB3254317D48FBB00A67580 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8CB3254217D48FBB00A67580 /* CADVoteCountView.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8CB3254417D48FBB00A67580 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8CB3256817D4904200A67580 /* QuartzCore.framework */,
+				8CB3254517D48FBB00A67580 /* UIKit.framework */,
+				8CB3254717D48FBB00A67580 /* Foundation.framework */,
+				8CB3254917D48FBB00A67580 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8CB3254B17D48FBB00A67580 /* CADVoteCountView */ = {
+			isa = PBXGroup;
+			children = (
+				8CB3255417D48FBB00A67580 /* AppDelegate.h */,
+				8CB3255517D48FBB00A67580 /* AppDelegate.m */,
+				8CB3256417D48FE000A67580 /* ViewController.h */,
+				8CB3256517D48FE000A67580 /* ViewController.m */,
+				8CB3256217D48FE000A67580 /* CADVoteCountView.h */,
+				8CB3256317D48FE000A67580 /* CADVoteCountView.m */,
+				8CB3254C17D48FBB00A67580 /* Supporting Files */,
+			);
+			path = CADVoteCountView;
+			sourceTree = "<group>";
+		};
+		8CB3254C17D48FBB00A67580 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8CB3254D17D48FBB00A67580 /* CADVoteCountView-Info.plist */,
+				8CB3254E17D48FBB00A67580 /* InfoPlist.strings */,
+				8CB3255117D48FBB00A67580 /* main.m */,
+				8CB3255317D48FBB00A67580 /* CADVoteCountView-Prefix.pch */,
+				8CB3255717D48FBB00A67580 /* Default.png */,
+				8CB3255917D48FBB00A67580 /* Default@2x.png */,
+				8CB3255B17D48FBB00A67580 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8CB3254117D48FBB00A67580 /* CADVoteCountView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CB3255F17D48FBB00A67580 /* Build configuration list for PBXNativeTarget "CADVoteCountView" */;
+			buildPhases = (
+				8CB3253E17D48FBB00A67580 /* Sources */,
+				8CB3253F17D48FBB00A67580 /* Frameworks */,
+				8CB3254017D48FBB00A67580 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CADVoteCountView;
+			productName = CADVoteCountView;
+			productReference = 8CB3254217D48FBB00A67580 /* CADVoteCountView.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8CB3253A17D48FBB00A67580 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Joan Romano";
+			};
+			buildConfigurationList = 8CB3253D17D48FBB00A67580 /* Build configuration list for PBXProject "CADVoteCountView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8CB3253917D48FBB00A67580;
+			productRefGroup = 8CB3254317D48FBB00A67580 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8CB3254117D48FBB00A67580 /* CADVoteCountView */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8CB3254017D48FBB00A67580 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CB3255017D48FBB00A67580 /* InfoPlist.strings in Resources */,
+				8CB3255817D48FBB00A67580 /* Default.png in Resources */,
+				8CB3255A17D48FBB00A67580 /* Default@2x.png in Resources */,
+				8CB3255C17D48FBB00A67580 /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8CB3253E17D48FBB00A67580 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CB3255217D48FBB00A67580 /* main.m in Sources */,
+				8CB3255617D48FBB00A67580 /* AppDelegate.m in Sources */,
+				8CB3256617D48FE000A67580 /* CADVoteCountView.m in Sources */,
+				8CB3256717D48FE000A67580 /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		8CB3254E17D48FBB00A67580 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8CB3254F17D48FBB00A67580 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8CB3255D17D48FBB00A67580 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		8CB3255E17D48FBB00A67580 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8CB3256017D48FBB00A67580 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CADVoteCountView/CADVoteCountView-Prefix.pch";
+				INFOPLIST_FILE = "CADVoteCountView/CADVoteCountView-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		8CB3256117D48FBB00A67580 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CADVoteCountView/CADVoteCountView-Prefix.pch";
+				INFOPLIST_FILE = "CADVoteCountView/CADVoteCountView-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8CB3253D17D48FBB00A67580 /* Build configuration list for PBXProject "CADVoteCountView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CB3255D17D48FBB00A67580 /* Debug */,
+				8CB3255E17D48FBB00A67580 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8CB3255F17D48FBB00A67580 /* Build configuration list for PBXNativeTarget "CADVoteCountView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CB3256017D48FBB00A67580 /* Debug */,
+				8CB3256117D48FBB00A67580 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8CB3253A17D48FBB00A67580 /* Project object */;
+}
