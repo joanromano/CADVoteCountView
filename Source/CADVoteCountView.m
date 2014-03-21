@@ -13,10 +13,7 @@
 static NSUInteger const kMaxAngle = 360;
 static NSUInteger const kActualMaxAngle = 343;
 
-static CGFloat const kMinHSLValue = 100.0f;
-static CGFloat const kMaxHSLValue = 340.0f;
-
-static CGFloat const kPaddingArea = 3.0f;
+static CGFloat const kPaddingArea = 10.0f;
 static CGFloat const kAnimationDuration = 0.5f;
 static CGFloat const kDefaultColorLineWidthRatio = 6.0f;
 static CGFloat const kDefaultBackgroundLineWidthRatio = 4.0f;
@@ -24,8 +21,7 @@ static CGFloat const kDefaultBackgroundLineWidthRatio = 4.0f;
 @interface CADVoteCountView ()
 
 @property (nonatomic) NSUInteger radius;
-@property (nonatomic, strong) CAShapeLayer *colorPathLayer;
-@property (nonatomic, strong) CAShapeLayer *backgroundLayer;
+
 @property (nonatomic, strong) CAAnimationGroup *colorPathGroupAnimation;
 @property (nonatomic, strong) CAKeyframeAnimation *colorPathStrokeEndAnimation;
 @property (nonatomic, strong) CAKeyframeAnimation *colorPathStrokeColorAnimation;
@@ -36,22 +32,24 @@ static CGFloat const kDefaultBackgroundLineWidthRatio = 4.0f;
 - (UIColor *)colorFromCurrentAngle;
 - (UIColor *)colorFromAngle:(NSUInteger)angle;
 
-- (UIColor *)defaultBackgroundLayerColor;
-
 CGMutablePathRef createFullArcWithStartingAngleAndRadius(CGRect rect, long double angle, CGFloat radius, long double endAngle);
 
 @end
 
 @implementation CADVoteCountView
 
-@synthesize colorLineWidthRatio = _colorLineWidthRatio;
-@synthesize backgroundLineWidthRatio = _backgroundLineWidthRatio;
+@synthesize backgroundLayerColor = _backgroundLayerColor;
 
 #pragma mark - Class Methods
 
 + (NSUInteger)maxAngle
 {
     return kMaxAngle;
+}
+
++ (Class)layerClass
+{
+    return [CAShapeLayer class];
 }
 
 #pragma mark - Overridden Methods
@@ -69,6 +67,7 @@ CGMutablePathRef createFullArcWithStartingAngleAndRadius(CGRect rect, long doubl
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    
     [self setupView];
 }
 
@@ -79,49 +78,28 @@ CGMutablePathRef createFullArcWithStartingAngleAndRadius(CGRect rect, long doubl
     _radius = (CGRectGetWidth(self.frame)/2) - kPaddingArea;
     
     // Background drawing
-    [self.layer addSublayer:self.backgroundLayer];
+    CAShapeLayer *layer = (CAShapeLayer *)self.layer;
+    
+    layer.fillColor = nil;
+    layer.lineCap = kCALineCapButt;
+
+    layer.strokeColor = self.backgroundLayerColor.CGColor;
+    layer.lineWidth = CGRectGetWidth(self.bounds) / kDefaultBackgroundLineWidthRatio;
+    layer.path = createFullArcWithStartingAngleAndRadius(self.frame, M_PI_2, self.radius, M_PI_2 + (M_PI * 2));
     
     // Colored count drawing
-    [self.layer addSublayer:self.colorPathLayer];
+    CAShapeLayer *colorPathLayer = [CAShapeLayer layer];
+    colorPathLayer.fillColor = nil;
+    colorPathLayer.lineCap = kCALineCapRound;
+    colorPathLayer.strokeColor = [self colorFromCurrentAngle].CGColor;
+    colorPathLayer.strokeEnd = self.angle / (CGFloat)kMaxAngle;
+    colorPathLayer.lineWidth = CGRectGetWidth(self.bounds) / kDefaultColorLineWidthRatio;
+    colorPathLayer.path = createFullArcWithStartingAngleAndRadius(self.frame, M_PI_2, self.radius, M_PI_2 + (M_PI * 2));
+    
+    [layer addSublayer:colorPathLayer];
 }
 
 #pragma mark - Lazy
-
-- (CAShapeLayer *)backgroundLayer
-{
-    if (!_backgroundLayer)
-    {        
-        _backgroundLayer = [CAShapeLayer layer];
-        _backgroundLayer.fillColor = nil;
-        _backgroundLayer.lineCap = kCALineCapButt;
-    }
-    
-    _backgroundLayer.strokeColor = self.backgroundLayerColor ?
-                                   self.backgroundLayerColor.CGColor : [self defaultBackgroundLayerColor].CGColor;
-    _backgroundLayer.lineWidth = CGRectGetWidth(self.bounds) / (self.backgroundLineWidthRatio > 0.0f ?
-                                                                self.backgroundLineWidthRatio : kDefaultBackgroundLineWidthRatio);
-    _backgroundLayer.path = createFullArcWithStartingAngleAndRadius(self.frame, M_PI_2, self.radius, M_PI_2 + (M_PI * 2));
-    
-    return _backgroundLayer;
-}
-
-- (CAShapeLayer *)colorPathLayer
-{
-    if (!_colorPathLayer)
-    {
-        _colorPathLayer = [CAShapeLayer layer];
-        _colorPathLayer.fillColor = nil;
-        _colorPathLayer.lineCap = kCALineCapRound;
-        _colorPathLayer.strokeColor = [self colorFromCurrentAngle].CGColor;
-        _colorPathLayer.strokeEnd = self.angle / 360.0;
-    }
-    
-    _colorPathLayer.lineWidth = CGRectGetWidth(self.bounds) / (self.colorLineWidthRatio > 0.0f ?
-                                                               self.colorLineWidthRatio : kDefaultColorLineWidthRatio);
-    _colorPathLayer.path = createFullArcWithStartingAngleAndRadius(self.frame, M_PI_2, self.radius, M_PI_2 + (([CADVoteCountView maxAngle] * M_PI)/180));
-    
-    return _colorPathLayer;
-}
 
 - (CAAnimationGroup *)colorPathGroupAnimation
 {
@@ -169,13 +147,14 @@ CGMutablePathRef createFullArcWithStartingAngleAndRadius(CGRect rect, long doubl
 
 - (void)updateColorPath
 {
-    self.colorPathLayer.strokeColor = [self colorFromCurrentAngle].CGColor;
-    self.colorPathLayer.strokeEnd = self.angle / 360.0;
+    CAShapeLayer *colorSublayer = [self.layer.sublayers firstObject];
+    
+    colorSublayer.strokeColor = [self colorFromCurrentAngle].CGColor;
+    colorSublayer.strokeEnd = self.angle / (CGFloat)kMaxAngle;
 }
 
 - (void)setupView
 {
-    _radius = (CGRectGetWidth(self.frame)/2) - kPaddingArea;
     _angle = 180;
 }
 
@@ -192,11 +171,6 @@ CGMutablePathRef createFullArcWithStartingAngleAndRadius(CGRect rect, long doubl
     return [UIColor colorWithRed:red green:green blue:0 alpha:1];
 }
 
-- (UIColor *)defaultBackgroundLayerColor
-{
-    return [UIColor colorWithRed:68.0f/255.0f green:68.0f/255.0f blue:68.0f/255.0f alpha:1.0f];
-}
-
 #pragma mark - Public Methods
 
 - (void)setAngle:(NSUInteger)angle
@@ -206,7 +180,7 @@ CGMutablePathRef createFullArcWithStartingAngleAndRadius(CGRect rect, long doubl
 
 - (void)setAngle:(NSUInteger)angle bouncing:(BOOL)bouncing
 {
-    if (angle>[CADVoteCountView maxAngle])
+    if (angle>kMaxAngle)
         return;
     
     if (angle>kActualMaxAngle)
@@ -216,56 +190,34 @@ CGMutablePathRef createFullArcWithStartingAngleAndRadius(CGRect rect, long doubl
     
     CGFloat alpha = angle > _angle ? angle*1.2f : angle*0.8f;
     
-    self.colorPathStrokeEndAnimation.values = @[[NSNumber numberWithFloat:(CGFloat) (_angle / 360.0)],
-                                                [NSNumber numberWithFloat:(CGFloat) (alpha / 360.0)],
-                                                [NSNumber numberWithFloat:(CGFloat) (angle / 360.0)]];
+    self.colorPathStrokeEndAnimation.values = @[@(_angle / (CGFloat)kMaxAngle),
+                                                @(alpha / (CGFloat)kMaxAngle),
+                                                @(angle / (CGFloat)kMaxAngle)];
     
     self.colorPathStrokeColorAnimation.values = @[(id)[self colorFromAngle:_angle].CGColor,
                                                   (id)[self colorFromAngle:alpha].CGColor,
                                                   (id)[self colorFromAngle:angle].CGColor];
     
     _angle = angle;
+    
     [self updateColorPath];
     
     if (bouncing)
     {
-        [self.colorPathLayer addAnimation:self.colorPathGroupAnimation forKey:@"strokePathAnimation"];
+        [[self.layer.sublayers firstObject] addAnimation:self.colorPathGroupAnimation forKey:@"strokePathAnimation"];
     }
 }
 
-- (CGFloat)colorLineWidthRatio
+- (UIColor *)backgroundLayerColor
 {
-    return _colorLineWidthRatio > 0.0f ? _colorLineWidthRatio : kDefaultColorLineWidthRatio;
-}
-
-- (void)setColorLineWidthRatio:(CGFloat)colorLineWidthRatio
-{
-    if (colorLineWidthRatio <= 0.0f)
-        return;
-    
-    _colorLineWidthRatio = colorLineWidthRatio;
-    [self setNeedsLayout];
-}
-
-- (CGFloat)backgroundLineWidthRatio
-{
-    return _backgroundLineWidthRatio > 0.0f ? _backgroundLineWidthRatio : kDefaultBackgroundLineWidthRatio;
-}
-
-- (void)setBackgroundLineWidthRatio:(CGFloat)backgroundLineWidthRatio
-{
-    if (backgroundLineWidthRatio <= 0.0f)
-        return;
-    
-    _backgroundLineWidthRatio = backgroundLineWidthRatio;
-    [self setNeedsLayout];
+    return _backgroundLayerColor ? : [UIColor darkGrayColor];
 }
 
 - (void)setBackgroundLayerColor:(UIColor *)backgroundLayerColor
 {
     _backgroundLayerColor = backgroundLayerColor;
     
-    [self setNeedsLayout];
+    ((CAShapeLayer *)self.layer).strokeColor = backgroundLayerColor.CGColor;
 }
 
 @end

@@ -51,7 +51,7 @@
     [self.countView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_countView(80)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_countView)]];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[_countView]-80-[_animateButton]-[_changeBackgroundButton]-(>=0)-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_countView, _animateButton, _changeBackgroundButton)]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_animateButton(==100)]-[_animateWithBounceButton(==100)]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:NSDictionaryOfVariableBindings(_animateButton, _animateWithBounceButton)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_animateButton]-[_animateWithBounceButton(==_animateButton)]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:NSDictionaryOfVariableBindings(_animateButton, _animateWithBounceButton)]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.changeBackgroundButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
 }
 

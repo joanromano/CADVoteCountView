@@ -9,25 +9,10 @@
 @interface CADVoteCountView : UIView
 
 /**
- The background color for the arc. Defaults to [UIColor colorWithRed:68.0f/255.0f green:68.0f/255.0f blue:68.0f/255.0f alpha:1.0f]
+ The background color for the arc. Defaults to [UIColor darkGrayColor]
  */
 
 @property (nonatomic, strong) UIColor *backgroundLayerColor;
-
-/**
- The line width ratio for both the background and color layers, measured:
-    lineWidth = CGRectGetWidth(self.bounds) / ratio
- 
- Thus, the colorLineWidthRatio should ALWAYS be bigger or equal than the backgroundLineWidthRatio. 
- 
- Default values are:
- 
- backgroundLineWidthRatio = 4.0f
- colorLineWidthRatio = 6.0f
- */
-
-@property (nonatomic) CGFloat backgroundLineWidthRatio;
-@property (nonatomic) CGFloat colorLineWidthRatio;
 
 /**
  The angle for the inner colored arc, expressed in degrees.

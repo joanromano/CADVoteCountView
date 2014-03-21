@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C4643E918DCF4A600E7EFA0 /* CADVoteCountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4643E818DCF4A600E7EFA0 /* CADVoteCountView.m */; };
 		8CB3254617D48FBB00A67580 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB3254517D48FBB00A67580 /* UIKit.framework */; };
 		8CB3254817D48FBB00A67580 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB3254717D48FBB00A67580 /* Foundation.framework */; };
 		8CB3254A17D48FBB00A67580 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB3254917D48FBB00A67580 /* CoreGraphics.framework */; };
@@ -16,12 +17,13 @@
 		8CB3255817D48FBB00A67580 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB3255717D48FBB00A67580 /* Default.png */; };
 		8CB3255A17D48FBB00A67580 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB3255917D48FBB00A67580 /* Default@2x.png */; };
 		8CB3255C17D48FBB00A67580 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB3255B17D48FBB00A67580 /* Default-568h@2x.png */; };
-		8CB3256617D48FE000A67580 /* CADVoteCountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB3256317D48FE000A67580 /* CADVoteCountView.m */; };
 		8CB3256717D48FE000A67580 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB3256517D48FE000A67580 /* ViewController.m */; };
 		8CB3256917D4904200A67580 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB3256817D4904200A67580 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8C4643E718DCF4A600E7EFA0 /* CADVoteCountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CADVoteCountView.h; path = ../../Source/CADVoteCountView.h; sourceTree = "<group>"; };
+		8C4643E818DCF4A600E7EFA0 /* CADVoteCountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CADVoteCountView.m; path = ../../Source/CADVoteCountView.m; sourceTree = "<group>"; };
 		8CB3254217D48FBB00A67580 /* CADVoteCountView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CADVoteCountView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB3254517D48FBB00A67580 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8CB3254717D48FBB00A67580 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -35,8 +37,6 @@
 		8CB3255717D48FBB00A67580 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		8CB3255917D48FBB00A67580 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		8CB3255B17D48FBB00A67580 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		8CB3256217D48FE000A67580 /* CADVoteCountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADVoteCountView.h; sourceTree = "<group>"; };
-		8CB3256317D48FE000A67580 /* CADVoteCountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CADVoteCountView.m; sourceTree = "<group>"; };
 		8CB3256417D48FE000A67580 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		8CB3256517D48FE000A67580 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8CB3256817D4904200A67580 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -92,8 +92,8 @@
 				8CB3255517D48FBB00A67580 /* AppDelegate.m */,
 				8CB3256417D48FE000A67580 /* ViewController.h */,
 				8CB3256517D48FE000A67580 /* ViewController.m */,
-				8CB3256217D48FE000A67580 /* CADVoteCountView.h */,
-				8CB3256317D48FE000A67580 /* CADVoteCountView.m */,
+				8C4643E718DCF4A600E7EFA0 /* CADVoteCountView.h */,
+				8C4643E818DCF4A600E7EFA0 /* CADVoteCountView.m */,
 				8CB3254C17D48FBB00A67580 /* Supporting Files */,
 			);
 			path = CADVoteCountView;
@@ -180,8 +180,8 @@
 			files = (
 				8CB3255217D48FBB00A67580 /* main.m in Sources */,
 				8CB3255617D48FBB00A67580 /* AppDelegate.m in Sources */,
-				8CB3256617D48FE000A67580 /* CADVoteCountView.m in Sources */,
 				8CB3256717D48FE000A67580 /* ViewController.m in Sources */,
+				8C4643E918DCF4A600E7EFA0 /* CADVoteCountView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +296,7 @@
 				8CB3256117D48FBB00A67580 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
