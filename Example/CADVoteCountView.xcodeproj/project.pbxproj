@@ -28,9 +28,9 @@
 		8C4643E818DCF4A600E7EFA0 /* CADVoteCountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CADVoteCountView.m; path = ../../Source/CADVoteCountView.m; sourceTree = "<group>"; };
 		8CAE0F7018DF433E009F110C /* CADCircularVoteCountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CADCircularVoteCountView.h; path = ../../Source/CADCircularVoteCountView.h; sourceTree = "<group>"; };
 		8CAE0F7118DF433E009F110C /* CADCircularVoteCountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CADCircularVoteCountView.m; path = ../../Source/CADCircularVoteCountView.m; sourceTree = "<group>"; };
-		8CAE0F7318DF491C009F110C /* CADVoteCountView+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CADVoteCountView+Private.h"; sourceTree = "<group>"; };
 		8CAE0F7618DF4E11009F110C /* CADLinearVoteCountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CADLinearVoteCountView.h; path = ../../Source/CADLinearVoteCountView.h; sourceTree = "<group>"; };
 		8CAE0F7718DF4E11009F110C /* CADLinearVoteCountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CADLinearVoteCountView.m; path = ../../Source/CADLinearVoteCountView.m; sourceTree = "<group>"; };
+		8CAE0F8418DF599E009F110C /* CADVoteCountView+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CADVoteCountView+Private.h"; path = "../../Source/CADVoteCountView+Private.h"; sourceTree = "<group>"; };
 		8CB3254217D48FBB00A67580 /* CADVoteCountView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CADVoteCountView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB3254517D48FBB00A67580 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8CB3254717D48FBB00A67580 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -101,7 +101,7 @@
 				8CB3256517D48FE000A67580 /* ViewController.m */,
 				8C4643E718DCF4A600E7EFA0 /* CADVoteCountView.h */,
 				8C4643E818DCF4A600E7EFA0 /* CADVoteCountView.m */,
-				8CAE0F7318DF491C009F110C /* CADVoteCountView+Private.h */,
+				8CAE0F8418DF599E009F110C /* CADVoteCountView+Private.h */,
 				8CAE0F7018DF433E009F110C /* CADCircularVoteCountView.h */,
 				8CAE0F7118DF433E009F110C /* CADCircularVoteCountView.m */,
 				8CAE0F7618DF4E11009F110C /* CADLinearVoteCountView.h */,
