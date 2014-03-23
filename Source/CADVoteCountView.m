@@ -10,6 +10,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
+static NSUInteger const kDefaultAngle = 180;
 static NSUInteger const kMaxAngle = 360;
 static NSUInteger const kActualMaxAngle = 343;
 
@@ -31,8 +32,6 @@ static CGFloat const kDefaultBackgroundLineWidthRatio = 4.0f;
 
 - (UIColor *)colorFromCurrentAngle;
 - (UIColor *)colorFromAngle:(NSUInteger)angle;
-
-CGMutablePathRef createFullArcWithStartingAngleAndRadius(CGRect rect, long double angle, CGFloat radius, long double endAngle);
 
 @end
 
@@ -85,7 +84,7 @@ CGMutablePathRef createFullArcWithStartingAngleAndRadius(CGRect rect, long doubl
 
     layer.strokeColor = self.backgroundLayerColor.CGColor;
     layer.lineWidth = CGRectGetWidth(self.bounds) / kDefaultBackgroundLineWidthRatio;
-    layer.path = createFullArcWithStartingAngleAndRadius(self.frame, M_PI_2, self.radius, M_PI_2 + (M_PI * 2));
+    layer.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2) radius:self.radius startAngle:M_PI_2 endAngle:M_PI_2 + (M_PI * 2) clockwise:YES].CGPath;
     
     // Colored count drawing
     CAShapeLayer *colorPathLayer = [CAShapeLayer layer];
@@ -94,7 +93,7 @@ CGMutablePathRef createFullArcWithStartingAngleAndRadius(CGRect rect, long doubl
     colorPathLayer.strokeColor = [self colorFromCurrentAngle].CGColor;
     colorPathLayer.strokeEnd = self.angle / (CGFloat)kMaxAngle;
     colorPathLayer.lineWidth = CGRectGetWidth(self.bounds) / kDefaultColorLineWidthRatio;
-    colorPathLayer.path = createFullArcWithStartingAngleAndRadius(self.frame, M_PI_2, self.radius, M_PI_2 + (M_PI * 2));
+    colorPathLayer.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2) radius:self.radius startAngle:M_PI_2 endAngle:M_PI_2 + (M_PI * 2) clockwise:YES].CGPath;
     
     [layer addSublayer:colorPathLayer];
 }
@@ -137,14 +136,6 @@ CGMutablePathRef createFullArcWithStartingAngleAndRadius(CGRect rect, long doubl
 
 #pragma mark - Private Methods
 
-CGMutablePathRef createFullArcWithStartingAngleAndRadius(CGRect rect, long double angle, CGFloat radius, long double endAngle)
-{
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathAddArc(path, NULL, CGRectGetWidth(rect)/2  , CGRectGetHeight(rect)/2, radius, angle, endAngle, 0);
-    
-    return path;
-}
-
 - (void)updateColorPath
 {
     CAShapeLayer *colorSublayer = [self.layer.sublayers firstObject];
@@ -155,7 +146,7 @@ CGMutablePathRef createFullArcWithStartingAngleAndRadius(CGRect rect, long doubl
 
 - (void)setupView
 {
-    _angle = 180;
+    _angle = kDefaultAngle;
 }
 
 - (UIColor *)colorFromCurrentAngle
@@ -165,8 +156,8 @@ CGMutablePathRef createFullArcWithStartingAngleAndRadius(CGRect rect, long doubl
 
 - (UIColor *)colorFromAngle:(NSUInteger)angle
 {
-    CGFloat green = ((CGFloat)angle / ((CGFloat)360 -1));
-    CGFloat red = (- 1 / ((CGFloat)360 - 1) * (CGFloat)angle) + 1;
+    CGFloat green = ((CGFloat)angle / ((CGFloat)kMaxAngle -1));
+    CGFloat red = (- 1 / ((CGFloat)kMaxAngle - 1) * (CGFloat)angle) + 1;
     
     return [UIColor colorWithRed:red green:green blue:0 alpha:1];
 }
@@ -180,7 +171,7 @@ CGMutablePathRef createFullArcWithStartingAngleAndRadius(CGRect rect, long doubl
 
 - (void)setAngle:(NSUInteger)angle bouncing:(BOOL)bouncing
 {
-    if (angle>kMaxAngle)
+    if (angle>kMaxAngle || angle == _angle)
         return;
     
     if (angle>kActualMaxAngle)
@@ -188,11 +179,12 @@ CGMutablePathRef createFullArcWithStartingAngleAndRadius(CGRect rect, long doubl
         angle = kActualMaxAngle;
     }
     
-    CGFloat alpha = angle > _angle ? angle*1.2f : angle*0.8f;
+    CGFloat alpha = angle > _angle ? angle*1.2f : angle*0.8f,
+            maxAngle = (CGFloat)[CADVoteCountView maxAngle];
     
-    self.colorPathStrokeEndAnimation.values = @[@(_angle / (CGFloat)kMaxAngle),
-                                                @(alpha / (CGFloat)kMaxAngle),
-                                                @(angle / (CGFloat)kMaxAngle)];
+    self.colorPathStrokeEndAnimation.values = @[@(_angle / maxAngle),
+                                                @(alpha / maxAngle),
+                                                @(angle / maxAngle)];
     
     self.colorPathStrokeColorAnimation.values = @[(id)[self colorFromAngle:_angle].CGColor,
                                                   (id)[self colorFromAngle:alpha].CGColor,
