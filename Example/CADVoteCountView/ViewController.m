@@ -12,10 +12,12 @@
 
 @interface ViewController ()
 
+@property (nonatomic) CADVoteCountViewType currentType;
 @property (nonatomic, strong) CADVoteCountView *countView;
 @property (nonatomic, strong) UIButton *animateButton;
 @property (nonatomic, strong) UIButton *animateWithBounceButton;
 @property (nonatomic, strong) UIButton *changeBackgroundButton;
+@property (nonatomic, strong) UIButton *changeTypeButton;
 
 - (void)animateButtonPressed:(id)sender;
 - (void)changeBackgoundColorButtonPressed:(id)sender;
@@ -34,7 +36,9 @@
 {
     [super viewDidLoad];
     
-    [@[self.countView, self.animateButton, self.animateWithBounceButton, self.changeBackgroundButton]
+    self.currentType = CADVoteCountViewTypeCircular;
+    
+    [@[self.countView, self.animateButton, self.animateWithBounceButton, self.changeBackgroundButton, self.changeTypeButton]
      enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
         [self.view addSubview:subview];
     }];
@@ -47,12 +51,13 @@
     [super updateViewConstraints];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.countView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
-    [self.countView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_countView(80)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_countView)]];
-    [self.countView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_countView(80)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_countView)]];
+    [self.countView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_countView(130)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_countView)]];
+    [self.countView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_countView(60)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_countView)]];
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[_countView]-80-[_animateButton]-[_changeBackgroundButton]-(>=0)-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_countView, _animateButton, _changeBackgroundButton)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[_countView]-80-[_animateButton]-[_changeBackgroundButton]-[_changeTypeButton]-(>=0)-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_countView, _animateButton, _changeBackgroundButton, _changeTypeButton)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_animateButton]-[_animateWithBounceButton(==_animateButton)]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:NSDictionaryOfVariableBindings(_animateButton, _animateWithBounceButton)]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.changeBackgroundButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.changeTypeButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
 }
 
 #pragma mark - Lazy
@@ -61,7 +66,7 @@
 {
     if (!_countView)
     {
-        _countView = [[CADVoteCountView alloc] init];
+        _countView = [CADVoteCountView voteCountViewWithType:self.currentType];
         _countView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     
@@ -107,6 +112,19 @@
     return _changeBackgroundButton;
 }
 
+- (UIButton *)changeTypeButton
+{
+    if (!_changeTypeButton)
+    {
+        _changeTypeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _changeTypeButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_changeTypeButton addTarget:self action:@selector(changeTypeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [_changeTypeButton setTitle:@"Change Type" forState:UIControlStateNormal];
+    }
+    
+    return _changeTypeButton;
+}
+
 #pragma mark - Actions
 
 - (void)animateButtonPressed:(id)sender
@@ -119,17 +137,37 @@
     [self setRandomBackgrounColor];
 }
 
+- (void)changeTypeButtonPressed:(id)sender
+{
+    [self toggleType];
+}
+
 #pragma mark - Private Methods
 
 - (void)animateVoteCountViewBouncing:(BOOL)bouncing
 {
-    [self.countView setAngle:arc4random_uniform(360) bouncing:bouncing];
+    [self.countView setAngle:arc4random_uniform([self.countView maxAngle]) bouncing:bouncing];
 }
 
 - (void)setRandomBackgrounColor
 {
     
-    self.countView.backgroundLayerColor = [self randomColor];
+    self.countView.backgroundColor = [self randomColor];
+}
+
+- (void)toggleType
+{
+    [self.countView removeFromSuperview];
+    self.countView = nil;
+    
+    self.currentType = self.currentType == CADVoteCountViewTypeCircular ? CADVoteCountViewTypeLinear : CADVoteCountViewTypeCircular;
+    
+    [self.view addSubview:self.countView];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [self updateViewConstraints];
+        [self.view layoutIfNeeded];
+    }];
 }
 
 - (UIColor *)randomColor
