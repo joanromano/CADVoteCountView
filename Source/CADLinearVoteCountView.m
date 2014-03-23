@@ -50,7 +50,7 @@ static NSUInteger const kDefaultAngle = 50;
     [layer addSublayer:colorPathLayer];
 }
 
-- (void)setAngle:(NSUInteger)angle bouncing:(BOOL)bouncing
+- (void)setAngle:(NSUInteger)angle animationType:(CADVoteCountViewAnimationType)animationType
 {
     if (angle>[self maxAngle] || angle == _angle)
         return;
@@ -68,9 +68,20 @@ static NSUInteger const kDefaultAngle = 50;
     
     _angle = angle;
     
-    [self updateColorPath];
+    if (animationType == CADVoteCountViewAnimationTypeNone)
+    {
+        [CATransaction begin];
+        [CATransaction setValue:(id)kCFBooleanTrue
+                         forKey:kCATransactionDisableActions];
+        [self updateColorPath];
+        [CATransaction commit];
+    }
+    else
+    {
+        [self updateColorPath];
+    }
     
-    if (bouncing)
+    if (animationType == CADVoteCountViewAnimationTypeBouncing)
     {
         [[self.layer.sublayers lastObject] addAnimation:self.colorPathGroupAnimation forKey:@"strokePathAnimation"];
     }

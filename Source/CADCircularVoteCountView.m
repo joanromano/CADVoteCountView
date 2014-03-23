@@ -56,7 +56,7 @@ static CGFloat const kDefaultBackgroundLineWidthRatio = 4.0f;
     [layer addSublayer:colorPathLayer];
 }
 
-- (void)setAngle:(NSUInteger)angle bouncing:(BOOL)bouncing
+- (void)setAngle:(NSUInteger)angle animationType:(CADVoteCountViewAnimationType)animationType
 {
     if (angle>kMaxAngle || angle == _angle)
         return;
@@ -79,9 +79,20 @@ static CGFloat const kDefaultBackgroundLineWidthRatio = 4.0f;
     
     _angle = angle;
     
-    [self updateColorPath];
-    
-    if (bouncing)
+    if (animationType == CADVoteCountViewAnimationTypeNone)
+    {
+        [CATransaction begin];
+        [CATransaction setValue:(id)kCFBooleanTrue
+                         forKey:kCATransactionDisableActions];
+        [self updateColorPath];
+        [CATransaction commit];
+    }
+    else
+    {
+        [self updateColorPath];
+    }
+
+    if (animationType == CADVoteCountViewAnimationTypeBouncing)
     {
         [[self.layer.sublayers firstObject] addAnimation:self.colorPathGroupAnimation forKey:@"strokePathAnimation"];
     }

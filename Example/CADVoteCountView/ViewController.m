@@ -14,6 +14,7 @@
 
 @property (nonatomic) CADVoteCountViewType currentType;
 @property (nonatomic, strong) CADVoteCountView *countView;
+@property (nonatomic, strong) UIButton *changeButton;
 @property (nonatomic, strong) UIButton *animateButton;
 @property (nonatomic, strong) UIButton *animateWithBounceButton;
 @property (nonatomic, strong) UIButton *changeBackgroundButton;
@@ -21,10 +22,6 @@
 
 - (void)animateButtonPressed:(id)sender;
 - (void)changeBackgoundColorButtonPressed:(id)sender;
-
-- (void)animateVoteCountViewBouncing:(BOOL)bouncing;
-- (void)setRandomBackgrounColor;
-- (UIColor *)randomColor;
 
 @end
 
@@ -38,7 +35,7 @@
     
     self.currentType = CADVoteCountViewTypeCircular;
     
-    [@[self.countView, self.animateButton, self.animateWithBounceButton, self.changeBackgroundButton, self.changeTypeButton]
+    [@[self.countView, self.changeButton, self.animateButton, self.animateWithBounceButton, self.changeBackgroundButton, self.changeTypeButton]
      enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
         [self.view addSubview:subview];
     }];
@@ -55,7 +52,7 @@
     [self.countView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_countView(60)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_countView)]];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[_countView]-80-[_animateButton]-[_changeBackgroundButton]-[_changeTypeButton]-(>=0)-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_countView, _animateButton, _changeBackgroundButton, _changeTypeButton)]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_animateButton]-[_animateWithBounceButton(==_animateButton)]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:NSDictionaryOfVariableBindings(_animateButton, _animateWithBounceButton)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_changeButton(==_animateButton)]-[_animateButton]-[_animateWithBounceButton(==_animateButton)]-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:NSDictionaryOfVariableBindings(_changeButton, _animateButton, _animateWithBounceButton)]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.changeBackgroundButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.changeTypeButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
 }
@@ -71,6 +68,19 @@
     }
     
     return _countView;
+}
+
+- (UIButton *)changeButton
+{
+    if (!_changeButton)
+    {
+        _changeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _changeButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_changeButton addTarget:self action:@selector(animateButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [_changeButton setTitle:@"Change" forState:UIControlStateNormal];
+    }
+    
+    return _changeButton;
 }
 
 - (UIButton *)animateButton
@@ -129,7 +139,7 @@
 
 - (void)animateButtonPressed:(id)sender
 {
-    [self animateVoteCountViewBouncing:(sender == self.animateWithBounceButton)];
+    [self animateVoteCountViewWithAnimationType:(sender == self.changeButton ? CADVoteCountViewAnimationTypeNone : sender == self.animateButton ? CADVoteCountViewAnimationTypeDefault : CADVoteCountViewAnimationTypeBouncing)];
 }
 
 - (void)changeBackgoundColorButtonPressed:(id)sender
@@ -144,9 +154,9 @@
 
 #pragma mark - Private Methods
 
-- (void)animateVoteCountViewBouncing:(BOOL)bouncing
+- (void)animateVoteCountViewWithAnimationType:(CADVoteCountViewAnimationType)animationType
 {
-    [self.countView setAngle:arc4random_uniform([self.countView maxAngle]) bouncing:bouncing];
+    [self.countView setAngle:arc4random_uniform([self.countView maxAngle]) animationType:animationType];
 }
 
 - (void)setRandomBackgrounColor

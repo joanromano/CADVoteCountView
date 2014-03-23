@@ -82,10 +82,10 @@ static CGFloat const kAnimationDuration = 0.5f;
 
 - (void)setAngle:(NSUInteger)angle
 {
-    [self setAngle:angle bouncing:NO];
+    [self setAngle:angle animationType:CADVoteCountViewAnimationTypeNone];
 }
 
-- (void)setAngle:(NSUInteger)angle bouncing:(BOOL)bouncing
+- (void)setAngle:(NSUInteger)angle animationType:(CADVoteCountViewAnimationType)animationType
 {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:[NSString stringWithFormat:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)]
