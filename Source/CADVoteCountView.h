@@ -29,6 +29,12 @@ typedef NS_ENUM(NSUInteger, CADVoteCountViewAnimationType){
 };
 
 @interface CADVoteCountView : UIView
+{
+    /**
+     The angle for the inner colored arc, expressed in degrees.
+     */
+    NSUInteger angle;
+}
 
 /**
  Creates a new vote view with the specified type.
@@ -39,10 +45,10 @@ typedef NS_ENUM(NSUInteger, CADVoteCountViewAnimationType){
  */
 + (CADVoteCountView *)voteCountViewWithType:(CADVoteCountViewType)type;
 
-/**
- The angle for the inner colored arc, expressed in degrees.
- */
-@property (nonatomic) NSUInteger angle;
+
+
+/****************	Primitive methods		****************/
+
 
 /**
  Sets the angle for the inner colored arc.

@@ -8,17 +8,11 @@
 
 #import "CADVoteCountView.h"
 
-#import "CADVoteCountView+Private.h"
-#import "CADCircularVoteCountView.h"
-#import "CADLinearVoteCountView.h"
-
 #import <QuartzCore/QuartzCore.h>
 
 static CGFloat const kAnimationDuration = 0.5f;
 
 @interface CADVoteCountView ()
-
-@property (nonatomic) NSUInteger radius;
 
 @property (nonatomic, strong) CAAnimationGroup *colorPathGroupAnimation;
 @property (nonatomic, strong) CAKeyframeAnimation *colorPathStrokeEndAnimation;
@@ -31,6 +25,18 @@ static CGFloat const kAnimationDuration = 0.5f;
 - (UIColor *)colorFromAngle:(NSUInteger)angle;
 
 @end
+
+@interface CADCircularVoteCountView : CADVoteCountView
+
+@property (nonatomic) NSUInteger radius;
+
+@end
+
+@interface CADLinearVoteCountView : CADVoteCountView
+
+@end
+
+/****************	Abstract CADVoteCountView		****************/
 
 @implementation CADVoteCountView
 
@@ -87,9 +93,14 @@ static CGFloat const kAnimationDuration = 0.5f;
 
 #pragma mark - Public Methods
 
-- (void)setAngle:(NSUInteger)angle
+- (NSUInteger)angle
 {
-    [self setAngle:angle animationType:CADVoteCountViewAnimationTypeNone];
+    return angle;
+}
+
+- (void)setAngle:(NSUInteger)newAngle
+{
+    [self setAngle:newAngle animationType:CADVoteCountViewAnimationTypeNone];
 }
 
 - (void)setAngle:(NSUInteger)angle animationType:(CADVoteCountViewAnimationType)animationType
@@ -134,12 +145,12 @@ static CGFloat const kAnimationDuration = 0.5f;
     return [self colorFromAngle:self.angle];
 }
 
-- (UIColor *)colorFromAngle:(NSUInteger)angle
+- (UIColor *)colorFromAngle:(NSUInteger)newAngle
 {
     CGFloat maxAngle = (CGFloat)[self maxAngle];
     
-    CGFloat green = ((CGFloat)angle / (maxAngle -1));
-    CGFloat red = (- 1 / (maxAngle - 1) * (CGFloat)angle) + 1;
+    CGFloat green = ((CGFloat)newAngle / (maxAngle -1));
+    CGFloat red = (- 1 / (maxAngle - 1) * (CGFloat)newAngle) + 1;
     
     return [UIColor colorWithRed:red green:green blue:0 alpha:1];
 }
@@ -178,6 +189,198 @@ static CGFloat const kAnimationDuration = 0.5f;
     }
     
     return _colorPathStrokeEndAnimation;
+}
+
+@end
+
+/****************	CADCircularVoteCountView		****************/
+
+static NSUInteger const kCircularMaxAngle = 360;
+static NSUInteger const kCircularDefaultAngle = 180;
+static NSUInteger const kCircularActualMaxAngle = 343;
+
+static CGFloat const kPaddingArea = 10.0f;
+static CGFloat const kDefaultColorLineWidthRatio = 6.0f;
+static CGFloat const kDefaultBackgroundLineWidthRatio = 4.0f;
+
+@implementation CADCircularVoteCountView
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.radius = (CGRectGetWidth(self.frame)/2) - kPaddingArea;
+    
+    // Background drawing
+    CAShapeLayer *layer = (CAShapeLayer *)self.layer;
+    
+    layer.fillColor = nil;
+    layer.lineCap = kCALineCapButt;
+    
+    layer.strokeColor = [UIColor darkGrayColor].CGColor;
+    layer.lineWidth = CGRectGetWidth(self.bounds) / kDefaultBackgroundLineWidthRatio;
+    layer.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2) radius:self.radius startAngle:M_PI_2 endAngle:M_PI_2 + (M_PI * 2) clockwise:YES].CGPath;
+    
+    // Colored count drawing
+    CAShapeLayer *colorPathLayer = [CAShapeLayer layer];
+    colorPathLayer.fillColor = nil;
+    colorPathLayer.lineCap = kCALineCapRound;
+    colorPathLayer.strokeColor = [self colorFromCurrentAngle].CGColor;
+    colorPathLayer.strokeEnd = self.angle / (CGFloat)[self maxAngle];
+    colorPathLayer.lineWidth = CGRectGetWidth(self.bounds) / kDefaultColorLineWidthRatio;
+    colorPathLayer.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2) radius:self.radius startAngle:M_PI_2 endAngle:M_PI_2 + (M_PI * 2) clockwise:YES].CGPath;
+    
+    [layer addSublayer:colorPathLayer];
+}
+
+- (void)setAngle:(NSUInteger)newAngle animationType:(CADVoteCountViewAnimationType)animationType
+{
+    if (newAngle>kCircularMaxAngle || newAngle == angle)
+        return;
+    
+    if (newAngle>kCircularActualMaxAngle)
+    {
+        newAngle = kCircularActualMaxAngle;
+    }
+    
+    CGFloat alpha = newAngle > angle ? newAngle*1.2f : newAngle*0.8f,
+    maxAngle = (CGFloat)[self maxAngle];
+    
+    self.colorPathStrokeEndAnimation.values = @[@(angle / maxAngle),
+                                                @(alpha / maxAngle),
+                                                @(newAngle / maxAngle)];
+    
+    self.colorPathStrokeColorAnimation.values = @[(id)[self colorFromAngle:angle].CGColor,
+                                                  (id)[self colorFromAngle:alpha].CGColor,
+                                                  (id)[self colorFromAngle:newAngle].CGColor];
+    
+    angle = newAngle;
+    
+    if (animationType == CADVoteCountViewAnimationTypeNone)
+    {
+        [CATransaction begin];
+        [CATransaction setValue:(id)kCFBooleanTrue
+                         forKey:kCATransactionDisableActions];
+        [self updateColorPath];
+        [CATransaction commit];
+    }
+    else
+    {
+        [self updateColorPath];
+    }
+    
+    if (animationType == CADVoteCountViewAnimationTypeBouncing)
+    {
+        [[self.layer.sublayers firstObject] addAnimation:self.colorPathGroupAnimation forKey:@"strokePathAnimation"];
+    }
+}
+
+- (NSUInteger)defaultAngle
+{
+    return kCircularDefaultAngle;
+}
+
+- (NSUInteger)maxAngle
+{
+    return kCircularMaxAngle;
+}
+
+@end
+
+/****************	CADLinearVoteCountView		****************/
+
+static NSUInteger const kLinearMaxAngle = 100;
+static NSUInteger const kLinearDefaultAngle = 50;
+
+@implementation CADLinearVoteCountView
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    // Background drawing
+    CAShapeLayer *layer = (CAShapeLayer *)self.layer;
+    layer.fillColor = nil;
+    layer.lineCap = kCALineCapRound;
+    layer.strokeColor =  [UIColor darkGrayColor].CGColor;
+    layer.lineWidth = CGRectGetHeight(self.bounds)*0.8;
+    layer.path = createLineForRect(self.frame);
+    
+    // Second background drawing
+    CAShapeLayer *backgroundLayer = [CAShapeLayer layer];
+    backgroundLayer.fillColor = nil;
+    backgroundLayer.lineCap = kCALineCapRound;
+    backgroundLayer.strokeColor =  [UIColor whiteColor].CGColor;
+    backgroundLayer.lineWidth = CGRectGetHeight(self.bounds)*0.6;
+    backgroundLayer.path = createLineForRect(self.frame);
+    
+    // Colored count drawing
+    CAShapeLayer *colorPathLayer = [CAShapeLayer layer];
+    colorPathLayer.fillColor = nil;
+    colorPathLayer.lineCap = kCALineCapRound;
+    colorPathLayer.strokeColor = [self colorFromCurrentAngle].CGColor;
+    colorPathLayer.strokeEnd = self.angle / (CGFloat)[self maxAngle];
+    colorPathLayer.lineWidth = CGRectGetHeight(self.bounds)*0.4;
+    colorPathLayer.path = createLineForRect(self.frame);
+    
+    [layer addSublayer:backgroundLayer];
+    [layer addSublayer:colorPathLayer];
+}
+
+- (void)setAngle:(NSUInteger)newAngle animationType:(CADVoteCountViewAnimationType)animationType
+{
+    if (newAngle>[self maxAngle] || newAngle == angle)
+        return;
+    
+    CGFloat alpha = newAngle > angle ? newAngle*1.2f : newAngle*0.8f,
+    maxAngle = (CGFloat)[self maxAngle];
+    
+    self.colorPathStrokeEndAnimation.values = @[@(angle / maxAngle),
+                                                @(alpha / maxAngle),
+                                                @(newAngle / maxAngle)];
+    
+    self.colorPathStrokeColorAnimation.values = @[(id)[self colorFromAngle:angle].CGColor,
+                                                  (id)[self colorFromAngle:alpha].CGColor,
+                                                  (id)[self colorFromAngle:newAngle].CGColor];
+    
+    angle = newAngle;
+    
+    if (animationType == CADVoteCountViewAnimationTypeNone)
+    {
+        [CATransaction begin];
+        [CATransaction setValue:(id)kCFBooleanTrue
+                         forKey:kCATransactionDisableActions];
+        [self updateColorPath];
+        [CATransaction commit];
+    }
+    else
+    {
+        [self updateColorPath];
+    }
+    
+    if (animationType == CADVoteCountViewAnimationTypeBouncing)
+    {
+        [[self.layer.sublayers lastObject] addAnimation:self.colorPathGroupAnimation forKey:@"strokePathAnimation"];
+    }
+}
+
+- (NSUInteger)defaultAngle
+{
+    return kLinearDefaultAngle;
+}
+
+- (NSUInteger)maxAngle
+{
+    return kLinearMaxAngle;
+}
+
+CGMutablePathRef createLineForRect(CGRect rect)
+{
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, 0, CGRectGetHeight(rect)/2);
+    CGPathAddLineToPoint(path, NULL, CGRectGetWidth(rect), CGRectGetHeight(rect)/2);
+    
+    return path;
 }
 
 @end
