@@ -17,7 +17,7 @@ Finally, import the header file wherever you want to use it:
 And you are done!
 
 ### Initialization
-You should always instantiate the view programmatically (loading from nib not supported yet). In order yo do so, usage of voteCountViewWithType: creation method is mandatory.
+You should always instantiate the view programmatically (loading from nib not supported yet). In order to do so, usage of voteCountViewWithType: creation method is mandatory.
 
 ##Preview (click to see video)
 
