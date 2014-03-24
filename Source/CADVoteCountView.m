@@ -54,7 +54,21 @@ static CGFloat const kAnimationDuration = 0.5f;
 
 #pragma mark - Overridden Methods
 
-- (id)initWithFrame:(CGRect)frame
++ (id)alloc
+{
+    if ([self class] == [CADVoteCountView class])
+    {
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                       reason:@"You should use voteCountViewWithType: creation method to instantiate a CADVoteCountView instead"
+                                     userInfo:nil];
+    }
+    else
+    {
+        return [super alloc];
+    }
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame])
     {
@@ -62,13 +76,6 @@ static CGFloat const kAnimationDuration = 0.5f;
     }
     
     return self;
-}
-
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    
-    [self setupView];
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor

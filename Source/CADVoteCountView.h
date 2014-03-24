@@ -13,7 +13,7 @@ typedef NS_ENUM(NSUInteger, CADVoteCountViewType){
 
 typedef NS_ENUM(NSUInteger, CADVoteCountViewAnimationType){
     /**
-     No animation are applied to the angle change.
+     No animations are applied to the angle change.
      */
     CADVoteCountViewAnimationTypeNone,
     
@@ -30,6 +30,13 @@ typedef NS_ENUM(NSUInteger, CADVoteCountViewAnimationType){
 
 @interface CADVoteCountView : UIView
 
+/**
+ Creates a new vote view with the specified type.
+ 
+ @param type
+ 
+ @warning You should ALWAYS use this method to create a new vote view.
+ */
 + (CADVoteCountView *)voteCountViewWithType:(CADVoteCountViewType)type;
 
 /**
