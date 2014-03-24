@@ -1,12 +1,12 @@
 CADVoteCountView
 ================
 
-CADVoteCountView is a circular view where you animate the angle changes, used at Topic app to set the vote count of a post.
+CADVoteCountView is a circular or linear shaped view where you animate the angle changes, used at Topic app to set the vote count of a post.
 
 ##Usage
 
 ###Install
-Add the source files to your project. Dont forget to include the QuartzCore framework as well.
+Add the source files to your project. Don't forget to include the QuartzCore framework as well.
 
 Finally, import the header file wherever you want to use it:
 
@@ -17,7 +17,7 @@ Finally, import the header file wherever you want to use it:
 And you are done!
 
 ### Initialization
-You can load the view from a nib or instantiate it programmatically.
+You should always instantiate the view programmatically (loading from nib not supported yet). In order yo do so, usage of voteCountViewWithType: creation method is mandatory.
 
 ##Preview (click to see video)
 
