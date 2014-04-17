@@ -36,7 +36,7 @@ static CGFloat const kAnimationDuration = 0.5f;
 
 @end
 
-/****************	Abstract CADVoteCountView		****************/
+/****************   Abstract CADVoteCountView       ****************/
 
 @implementation CADVoteCountView
 
@@ -155,45 +155,22 @@ static CGFloat const kAnimationDuration = 0.5f;
     return [UIColor colorWithRed:red green:green blue:0 alpha:1];
 }
 
-#pragma mark - Lazy
-
-- (CAAnimationGroup *)colorPathGroupAnimation
+- (void)setupAnimationGroup
 {
-    if (!_colorPathGroupAnimation)
-    {
-        _colorPathGroupAnimation = [CAAnimationGroup animation];
-        _colorPathGroupAnimation.animations = @[self.colorPathStrokeColorAnimation, self.colorPathStrokeEndAnimation];
-        _colorPathGroupAnimation.duration = kAnimationDuration;
-    }
+    self.colorPathStrokeColorAnimation = [CAKeyframeAnimation animationWithKeyPath:@"strokeColor"];
+    self.colorPathStrokeColorAnimation.duration = kAnimationDuration;
     
-    return _colorPathGroupAnimation;
-}
-
-- (CAKeyframeAnimation *)colorPathStrokeColorAnimation
-{
-    if (!_colorPathStrokeColorAnimation)
-    {
-        _colorPathStrokeColorAnimation = [CAKeyframeAnimation animationWithKeyPath:@"strokeColor"];
-        _colorPathStrokeColorAnimation.duration = kAnimationDuration;
-    }
+    self.colorPathStrokeEndAnimation = [CAKeyframeAnimation animationWithKeyPath:@"strokeEnd"];
+    self.colorPathStrokeEndAnimation.duration = kAnimationDuration;
     
-    return _colorPathStrokeColorAnimation;
-}
-
-- (CAKeyframeAnimation *)colorPathStrokeEndAnimation
-{
-    if (!_colorPathStrokeEndAnimation)
-    {
-        _colorPathStrokeEndAnimation = [CAKeyframeAnimation animationWithKeyPath:@"strokeEnd"];
-        _colorPathStrokeEndAnimation.duration = kAnimationDuration;
-    }
-    
-    return _colorPathStrokeEndAnimation;
+    self.colorPathGroupAnimation = [CAAnimationGroup animation];
+    self.colorPathGroupAnimation.animations = @[self.colorPathStrokeColorAnimation, self.colorPathStrokeEndAnimation];
+    self.colorPathGroupAnimation.duration = kAnimationDuration;
 }
 
 @end
 
-/****************	CADCircularVoteCountView		****************/
+/****************   CADCircularVoteCountView        ****************/
 
 static NSUInteger const kCircularMaxAngle = 360;
 static NSUInteger const kCircularDefaultAngle = 180;
@@ -246,6 +223,8 @@ static CGFloat const kDefaultBackgroundLineWidthRatio = 4.0f;
     CGFloat alpha = newAngle > angle ? newAngle*1.2f : newAngle*0.8f,
     maxAngle = (CGFloat)[self maxAngle];
     
+    [self setupAnimationGroup];
+    
     self.colorPathStrokeEndAnimation.values = @[@(angle / maxAngle),
                                                 @(alpha / maxAngle),
                                                 @(newAngle / maxAngle)];
@@ -287,7 +266,7 @@ static CGFloat const kDefaultBackgroundLineWidthRatio = 4.0f;
 
 @end
 
-/****************	CADLinearVoteCountView		****************/
+/****************   CADLinearVoteCountView      ****************/
 
 static NSUInteger const kLinearMaxAngle = 100;
 static NSUInteger const kLinearDefaultAngle = 50;
@@ -334,6 +313,8 @@ static NSUInteger const kLinearDefaultAngle = 50;
     
     CGFloat alpha = newAngle > angle ? newAngle*1.2f : newAngle*0.8f,
     maxAngle = (CGFloat)[self maxAngle];
+    
+    [self setupAnimationGroup];
     
     self.colorPathStrokeEndAnimation.values = @[@(angle / maxAngle),
                                                 @(alpha / maxAngle),
