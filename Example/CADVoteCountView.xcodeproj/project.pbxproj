@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8C4643E918DCF4A600E7EFA0 /* CADVoteCountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4643E818DCF4A600E7EFA0 /* CADVoteCountView.m */; };
 		8CB3254617D48FBB00A67580 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB3254517D48FBB00A67580 /* UIKit.framework */; };
 		8CB3254817D48FBB00A67580 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB3254717D48FBB00A67580 /* Foundation.framework */; };
 		8CB3254A17D48FBB00A67580 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB3254917D48FBB00A67580 /* CoreGraphics.framework */; };
@@ -19,11 +18,11 @@
 		8CB3255C17D48FBB00A67580 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CB3255B17D48FBB00A67580 /* Default-568h@2x.png */; };
 		8CB3256717D48FE000A67580 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB3256517D48FE000A67580 /* ViewController.m */; };
 		8CB3256917D4904200A67580 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB3256817D4904200A67580 /* QuartzCore.framework */; };
+		A0A6FD326E094EE5B3F4BD0C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C9C9B9C241543069D02FF57 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8C4643E718DCF4A600E7EFA0 /* CADVoteCountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CADVoteCountView.h; path = ../../Source/CADVoteCountView.h; sourceTree = "<group>"; };
-		8C4643E818DCF4A600E7EFA0 /* CADVoteCountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CADVoteCountView.m; path = ../../Source/CADVoteCountView.m; sourceTree = "<group>"; };
+		0C9C9B9C241543069D02FF57 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB3254217D48FBB00A67580 /* CADVoteCountView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CADVoteCountView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CB3254517D48FBB00A67580 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		8CB3254717D48FBB00A67580 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -40,6 +39,7 @@
 		8CB3256417D48FE000A67580 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		8CB3256517D48FE000A67580 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		8CB3256817D4904200A67580 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		EC640D77BD874111B6A33DFE /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +51,7 @@
 				8CB3254617D48FBB00A67580 /* UIKit.framework in Frameworks */,
 				8CB3254817D48FBB00A67580 /* Foundation.framework in Frameworks */,
 				8CB3254A17D48FBB00A67580 /* CoreGraphics.framework in Frameworks */,
+				A0A6FD326E094EE5B3F4BD0C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +64,7 @@
 				8CB3254B17D48FBB00A67580 /* CADVoteCountView */,
 				8CB3254417D48FBB00A67580 /* Frameworks */,
 				8CB3254317D48FBB00A67580 /* Products */,
+				EC640D77BD874111B6A33DFE /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,6 +83,7 @@
 				8CB3254517D48FBB00A67580 /* UIKit.framework */,
 				8CB3254717D48FBB00A67580 /* Foundation.framework */,
 				8CB3254917D48FBB00A67580 /* CoreGraphics.framework */,
+				0C9C9B9C241543069D02FF57 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -92,8 +95,6 @@
 				8CB3255517D48FBB00A67580 /* AppDelegate.m */,
 				8CB3256417D48FE000A67580 /* ViewController.h */,
 				8CB3256517D48FE000A67580 /* ViewController.m */,
-				8C4643E718DCF4A600E7EFA0 /* CADVoteCountView.h */,
-				8C4643E818DCF4A600E7EFA0 /* CADVoteCountView.m */,
 				8CB3254C17D48FBB00A67580 /* Supporting Files */,
 			);
 			path = CADVoteCountView;
@@ -120,9 +121,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8CB3255F17D48FBB00A67580 /* Build configuration list for PBXNativeTarget "CADVoteCountView" */;
 			buildPhases = (
+				D9D517D1134C45DF8E563646 /* Check Pods Manifest.lock */,
 				8CB3253E17D48FBB00A67580 /* Sources */,
 				8CB3253F17D48FBB00A67580 /* Frameworks */,
 				8CB3254017D48FBB00A67580 /* Resources */,
+				33E03EB6B845412BB4E96CD2 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -173,6 +176,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		33E03EB6B845412BB4E96CD2 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9D517D1134C45DF8E563646 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8CB3253E17D48FBB00A67580 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -181,7 +217,6 @@
 				8CB3255217D48FBB00A67580 /* main.m in Sources */,
 				8CB3255617D48FBB00A67580 /* AppDelegate.m in Sources */,
 				8CB3256717D48FE000A67580 /* ViewController.m in Sources */,
-				8C4643E918DCF4A600E7EFA0 /* CADVoteCountView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +292,7 @@
 		};
 		8CB3256017D48FBB00A67580 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC640D77BD874111B6A33DFE /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CADVoteCountView/CADVoteCountView-Prefix.pch";
@@ -268,6 +304,7 @@
 		};
 		8CB3256117D48FBB00A67580 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EC640D77BD874111B6A33DFE /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CADVoteCountView/CADVoteCountView-Prefix.pch";
