@@ -9,7 +9,15 @@ CADVoteCountView is a circular or linear shaped view where you animate the angle
 ##Usage
 
 ###Install
-Add the source files to your project. Don't forget to include the QuartzCore framework as well.
+We strongly encourage you to use Cocoapods. It's simple, just add the dependency to your `Podfile`:
+
+```ruby
+platform :ios, '7.0'
+
+pod 'CADVoteCountView'
+```
+
+And then running `pod install` will install the dependencies.
 
 Finally, import the header file wherever you want to use it:
 
@@ -19,8 +27,15 @@ Finally, import the header file wherever you want to use it:
 
 And you are done!
 
+### Demo
+
+To check the demo, first install the dependencies with Cocoapods. After that, build and run the `Example` project in Xcode.
+
+
 ### Initialization
 You should always instantiate the view programmatically (loading from nib not supported yet). In order to do so, usage of voteCountViewWithType: creation method is mandatory.
+
+Refer to the header file [`CADVoteCountView.h`](Source/CADVoteCountView.h) for more documentation.
 
 ## MIT License
 Copyright (c) 2014 [Joan Romano](http://twitter.com/joanromano)
