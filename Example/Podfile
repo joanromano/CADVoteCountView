@@ -1,0 +1,5 @@
+plattform :ios, '7.0'
+
+inhibit_all_warnings!
+
+pod 'CADVoteCountView',                    '~> 0.0.1'
