@@ -9,7 +9,7 @@ CADVoteCountView is a circular or linear shaped view where you animate the angle
 ##Usage
 
 ###Install
-We strongly encourage you to use Cocoapods. It's simple, just add the dependency to your `Podfile`:
+We strongly encourage you to use CocoaPods. It's simple, just add the dependency to your `Podfile`:
 
 ```ruby
 platform :ios, '7.0'
@@ -29,7 +29,7 @@ And you are done!
 
 ### Demo
 
-To check the demo, first install the dependencies with Cocoapods. After that, build and run the `Example` project in Xcode.
+To check the demo, first install the dependencies with CocoaPods. After that, build and run the `Example` project in Xcode.
 
 
 ### Initialization
